@@ -1,0 +1,21 @@
+{
+  "name": "SugarForce",
+  "version": "0.1.0",
+  "size": {
+    "width": 5,
+    "height": 3
+  },
+  "collections": [{
+    "name": "opportunities"
+  }],
+  "mapping": [
+    {
+      "dataSetId": "674d7ea7-c060-46b9-af2e-d3a8e3b1fcba",
+      "alias": "economicstrength",
+      "fields": []
+    }
+  ],
+  "fileName": "manifest.json",
+  "proxyId": "c65ccbe3-cfd6-42f9-82f1-52ed91a8073d",
+  "id": "7bb0c6aa-e5a3-41a6-a533-8f56e2299c8a"
+}
