@@ -6,5 +6,31 @@
 //
 // For additional documentation on how you can query your data, please refer to
 // https://developer.domo.com/docs/dev-studio/dev-studio-data
-domo.get('/data/v2/economicstrength?fields=Company_Name,Full_Address,US_Region,Address_Line,City,US_State,FIPS_STRING,US_County,US_ZIP,Metropolitan_Area,Median_Home_Prices,Metro_Area_GDP&limit=501')
-.then(data => drawTable(data, 'leads-table'));
+domo.get('/data/v2/economicstrength?fields=Company_Name,Address_Line,City,US_State,US_ZIP,US_Region,Metropolitan_Area,Median_Home_Prices,Metro_Area_GDP&limit=501')
+.then(data => {
+    // Filter out rows with null Metro_Area_GDP
+    const filteredData = data.filter(row => row.Metro_Area_GDP !== null);
+
+    // Sort the filtered data by Company_Name in alphabetical order
+    filteredData.sort((a, b) => {
+        const companyA = a.Company_Name.toUpperCase();
+        const companyB = b.Company_Name.toUpperCase();
+        if (companyA < companyB) {
+            return -1;
+        }
+        if (companyA > companyB) {
+            return 1;
+        }
+        return 0;
+    });
+
+    // Round the Median_Home_Prices to two decimal places
+    filteredData.forEach(row => {
+        if (typeof row.Median_Home_Prices === 'number') {
+            row.Median_Home_Prices = row.Median_Home_Prices.toFixed(2);
+        }
+    });
+
+    // Call a function to draw the sorted table
+    drawTable(filteredData, 'leads-table');
+});

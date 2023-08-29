@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@domoinc/domo-phoenix": "^0.20.1"
+  }
+}
